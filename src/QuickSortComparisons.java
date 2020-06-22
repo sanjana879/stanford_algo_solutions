@@ -31,10 +31,12 @@ public class QuickSortComparisons
 	
 	public long countCompareLast(long[] arr, long start, long end)
 	{
+		//System.out.println(Arrays.toString(arr) + " " + start + " " + end);
 		long temp = arr[(int) end];
+		swap(arr,start,end);
 		long length = (end-start) + 1;
 		count += length - 1;
-		
+		//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + temp);
 		long i = start + 1;
 		for(long j = start + 1; j <= end;j++)
 		{
@@ -44,8 +46,8 @@ public class QuickSortComparisons
 				i = i +1;
 			}
 		}
-		swap(arr,end,i-1);
-		
+		swap(arr,start,i-1);
+		//System.out.println(Arrays.toString(arr) );
 		return i-1;
 	}
 	
@@ -68,6 +70,9 @@ public class QuickSortComparisons
 		else 
 			pivot = intEnd;
 		
+		swap(arr,pivot, start);
+		//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + pivot + " " + temp);
+
 		//long temp = arr[(int) end];
 		long length = (end-start) + 1;
 		count += length - 1;
@@ -81,7 +86,7 @@ public class QuickSortComparisons
 				i = i +1;
 			}
 		}
-		swap(arr,pivot,i-1);
+		swap(arr,start,i-1);
 		
 		return i-1;
 	}
@@ -119,11 +124,11 @@ public class QuickSortComparisons
 	
 	void sortMiddle(long[] arr, long start, long end)
 	{
-		
+		//System.out.println(Arrays.toString(arr) + " " + start + " " + end );
 		if(start < end)
 		{
 			long m = countCompareMiddle(arr,start,end);
-			System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + m);
+			//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + m);
 			sortMiddle(arr,start,m-1);
 			sortMiddle(arr,m+1,end);
 		}
@@ -149,14 +154,17 @@ public class QuickSortComparisons
 		QuickSortComparisons q = new QuickSortComparisons();
 		Scanner s = new Scanner(new File("input1.txt"));
 		long[] arr = q.array(s);
-//		q.sortFirst(Arrays.copyOf(arr, arr.length), 0, arr.length-1);
-//		System.out.println(q.count);
-//		q.count = 0;
-//		q.sortLast(Arrays.copyOf(arr, arr.length), 0, arr.length-1);
-//		System.out.println(q.count);
-//		q.count = 0;
-		q.sortMiddle(Arrays.copyOf(arr, arr.length), 0, arr.length-1);
-		System.out.println(q.count);
+		long[] copy = Arrays.copyOf(arr, arr.length);
+		q.sortFirst(copy, 0, arr.length-1);
+		System.out.println(q.count);//+ " " + Arrays.toString(copy));
+		q.count = 0;
+		copy = Arrays.copyOf(arr, arr.length);
+		q.sortLast(copy, 0, arr.length-1);
+		System.out.println(q.count);// + " " + Arrays.toString(copy));
+		q.count = 0;
+		copy = Arrays.copyOf(arr, arr.length);
+		q.sortMiddle(copy, 0, arr.length-1);
+		System.out.println(q.count );//+ " " + Arrays.toString(copy));
 		q.count = 0;
 	}
 

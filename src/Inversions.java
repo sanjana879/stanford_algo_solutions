@@ -8,6 +8,10 @@ public class Inversions
 {
 	public static void main(String[] args) throws FileNotFoundException 
 	{
+		
+		String ip = "172.16.254.1";
+		String[] arr1= ip.split("[/.]");
+		System.out.println(arr1.length);
 		Scanner s = new Scanner(new File("input.txt"));
 		
 		
