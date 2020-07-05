@@ -178,15 +178,3 @@ class Edge
 		return String.valueOf("[" + dest + "," + weight + "]");
 	}
 }
-class Vertex2
-{
-	int val;
-	public Vertex2(int v)
-	{
-		val = v;
-	}
-	public String toString()
-	{
-		return String.valueOf(val);
-	}
-}
