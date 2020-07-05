@@ -1,5 +1,5 @@
 # Solutions for Stanford Algorithms Coursera Specialization
-Tested with https://github.com/beaunus/stanford-algs/tree/master/testCases test cases
+Tested with https://github.com/beaunus/stanford-algs/tree/master/testCases 
 
 Course 1 - Karatsuba Multiplication, Inversions, Quicksort Comparisons Count, Graph Minimum Cut
 
