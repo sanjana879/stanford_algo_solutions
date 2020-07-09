@@ -22,7 +22,6 @@ public class KaratsubaMult
 		BigInteger One = new BigInteger("1");
 		BigInteger Two = new BigInteger("2");
 
-		//System.out.println(x + " " + y);
 	    if (x.compareTo(Ten) == -1 && y.compareTo(Ten) == -1)
 		{
 			return x.multiply(y);

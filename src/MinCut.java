@@ -34,11 +34,9 @@ public class MinCut
 		for(int i = 0; i < times*times;i++)
 		{
 			Graph original = new Graph();
-			//System.out.println(i + " " + original);
 			original.adjList.putAll(g.adjList);
 			
 			Graph newG = new Graph( g.copy(g.adjListCloned));
-			//System.out.println(i );
 			findMin(newG);
 			
 		}
@@ -52,24 +50,15 @@ public class MinCut
 		while(size > 2)
 		{
 			 int rand = (int) ((Math.random() * (numEdges - 1)) + 1);
-			 //System.out.println(size);
 			 Vertex[] returned = findVertices(g.adjList,rand);
-			 //System.out.println(returned[0] + " " + returned[1]);
 			 g.merge(returned[0], findVertex(g.adjList,returned[1].val));
 			 size --;
 			 numEdges = countEdges(g.adjList);
-			 //if(numEdges < 2)
-				 //System.out.println(returned[0] + " " + returned[1]);
-				 //System.out.println(g);
 		}
 		if(numEdges < smallestNum)
 		{
 			smallestNum = numEdges;
 			smallest = new Graph(g.adjList);
-			/*if(smallestNum < 2)
-				System.out.println(smallest);
-			if(smallestNum == 2)
-				System.out.println(smallest);*/
 		}
 		
 		return new Graph(g.adjList);
@@ -78,7 +67,6 @@ public class MinCut
 	public Vertex[] findVertices(HashMap<Vertex, List<Vertex>> adjList, int num)
 	{
 		int copy = num;
-		//System.out.println("ind " + num + " " + g);
 		Vertex[] returned = new Vertex[2];
 		Iterator<Vertex> keySet = adjList.keySet().iterator();
 		Iterator<List<Vertex>> valSet = adjList.values().iterator();
@@ -93,14 +81,11 @@ public class MinCut
 
 			
 		}
-		//System.out.println(adjList + " " + copy + " " + num);
 		if(num <= 0)
 		{
 			returned[0] = curr;
-			//System.out.println(currList.size()+num-1 + " " +currList.get(currList.size()+num-1));
 			returned[1] = (currList.get(currList.size()+num-1));
 		}
-		//System.out.println(num + " " + curr.val + currList.toString() + " " + returned[0] + " " + returned[1]);
 		return returned;
 	}
 	
@@ -113,10 +98,7 @@ public class MinCut
 		while(valSet.hasNext())
 		{
 			int size = valSet.next().size();
-			count += size;
-			//if(size == 0)
-				//count += 1;
-			
+			count += size;	
 		}
 		return count/2;
 	}
@@ -135,9 +117,7 @@ public class MinCut
 			}
 			list.put(key, values);
 		}
-		//System.out.println(list);
 		Graph g = new Graph(list);
-		//System.out.println(list.toString());
 		return g;
 	}
 	
@@ -174,26 +154,20 @@ class Graph
 	}
 	public HashMap <Vertex, List<Vertex>> copy(HashMap<Vertex, List<Vertex>> original)
 	{
-		//HashMap<Vertex, List<Vertex>> original = adjList;
-		//System.out.println(original);
-		    HashMap<Vertex, List<Vertex>> copy = new HashMap<Vertex, List<Vertex>>();
-		    for (Vertex entry : original.keySet())
-		    {
-		    		//System.out.println(entry);
-		        copy.put(new Vertex(entry.val),
-		           // Or whatever List implementation you'd like here.
-		           new ArrayList<Vertex>(original.get(entry)));
-		    }
-		    return (copy);
+	    HashMap<Vertex, List<Vertex>> copy = new HashMap<Vertex, List<Vertex>>();
+	    for (Vertex entry : original.keySet())
+	    {
+	    		
+	        copy.put(new Vertex(entry.val),
+	           new ArrayList<Vertex>(original.get(entry)));
+	    }
+	    return (copy);
 	}
 	public void merge(Vertex a, Vertex b)
 	{
-		//System.out.println();
-		//add new values & remove key
 		List<Vertex> aList = adjList.get(a);
 		List<Vertex> bList = adjList.get(b);
-		//System.out.println(aList);
-		//System.out.println(adjList.get(b));
+
 		bList.forEach((value) -> {
 			if(value.val != b.val) 
 				aList.add(value);
@@ -211,7 +185,6 @@ class Graph
 				//remove self loops
 				if(value.val == b.val || value.val == v.val) 
 					toRemove.add(value);
-					//currList.remove(value);
 			});
 			for(int i = 0; i < toRemove.size();i++)
 				currList.remove(toRemove.get(i));
@@ -231,7 +204,6 @@ class Graph
 	public Graph(HashMap<Vertex, List<Vertex>> a)
 	{
 		adjList = a;
-		//System.out.println(a);
 		adjListCloned = copy(a);
 	}
 	public Graph()

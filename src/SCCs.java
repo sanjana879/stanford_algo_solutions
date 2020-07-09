@@ -14,7 +14,6 @@ public class SCCs
 	Stack<Node> stack = new Stack<Node>();
 	public static void main(String[] args) throws FileNotFoundException 
 	{
-		// TODO Auto-generated method stub
 		SCCs min = new SCCs();
 		Scanner s = new Scanner(new File("scc.txt"));
 		DirectedGraph g = min.makeGraph(s);
@@ -27,7 +26,6 @@ public class SCCs
 		while(keys.hasNext())
 		{
 			Node k = keys.next();
-			//System.out.println(k);
 			if(k.val == key)
 				return k;
 		}
@@ -41,17 +39,14 @@ public class SCCs
 		while(s.hasNextLine())
 		{
 			String[] input = s.nextLine().split(" " );
-			//System.out.println(Arrays.toString(input));
 			Node key = new Node(Integer.parseInt(input[0]));
 			List<Node> values = edges.get(findNode(key.val,edges.keySet()));
 			if(values == null)
 			{
 				values = new ArrayList<Node>();
 				Node added = findNode(Integer.parseInt(input[1]),edges.keySet());
-				//System.out.println(input[1] + " " + added);
 				if(added == null)
 				{
-					//System.out.println(input[1] + " " + added);
 					added = new Node(Integer.parseInt(input[1]));
 					edges.put(added, new ArrayList<Node>());
 				}
@@ -61,10 +56,8 @@ public class SCCs
 			else
 			{
 				Node added = findNode(Integer.parseInt(input[1]),edges.keySet());
-				//System.out.println(input[1] + " " + added);
 				if(added == null)
 				{
-					//System.out.println(input[1] + " " + added);
 					added = new Node(Integer.parseInt(input[1]));
 					edges.put(added, new ArrayList<Node>());
 				}
@@ -80,7 +73,6 @@ public class SCCs
 	public void algorithm(DirectedGraph g)
 	{
 		System.out.println(g.edges);
-		//System.out.println(g.vertices);
 		DirectedGraph rev = g.reverse();
 		System.out.println(rev);
 		DFSLoop(rev);
@@ -98,24 +90,17 @@ public class SCCs
 		while(nodes.hasNext())
 		{
 			Node curr = nodes.next();
-			//System.out.println(curr.val);
 			if(!curr.visited)
 			{
 				s = curr;
 				DFS(g,curr);
 			}
-			//System.out.println("------");
 		}
 		
 	}
 	public void DFSUtil(DirectedGraph g)
 	{
 		ArrayList<Integer> highest= new ArrayList<Integer>(5);
-		/*highest.add(0);
-		highest.add(0);
-		highest.add(0);
-		highest.add(0);
-		highest.add(0);*/
 		System.out.println(stack);
 		while(!stack.isEmpty())
 		{
@@ -123,26 +108,18 @@ public class SCCs
 			if(!n.visited)
 			{
 				int cnt = DFS2(g,n,0);
-				/*for(int i = 0; i < 5;i++)
-				{
-					if(highest.get(i) < cnt)
-						highest.add(i, cnt);
-				}*/
 				System.out.println("count " + cnt);
 			}
 		}
-		//System.out.println("\nhi " + highest);
 	}
 	private int DFS2(DirectedGraph g, Node node, int count) 
 	{
 		node.visited = true;
 		count++;
-		//System.out.print(node.val + " ");
 		List<Node> list = g.edges.get(node);
 		for(int i = 0;i<list.size();i++)
 		{
 			Node j = list.get(i);
-			//System.out.println(j.visited);
 			if(!j.visited)
 			{
 				count = DFS2(g,j,count);
@@ -156,7 +133,6 @@ public class SCCs
 		n.visited = true;
 		n.leader = s;
 		List<Node> list = g.edges.get(n);
-		//System.out.println(list);
 		
 		for(int i = 0;i<list.size();i++)
 		{
@@ -168,7 +144,6 @@ public class SCCs
 		}
 		t++;
 		n.finish = t;
-		//System.out.println(n.val);
 		stack.push(n);
 	}
 	
@@ -222,8 +197,6 @@ class DirectedGraph
 				}
 				v.add(value.val);
 				
-				//
-			
 			});
 		}
 		

@@ -13,7 +13,7 @@ public class QuickSortComparisons
 		long temp = arr[(int) start];
 		long length = (end-start) + 1;
 		count += length - 1;
-		//System.out.println(Arrays.toString(arr) + " " + length + " " + start + " " + end);
+		
 		long i = start + 1;
 		for(long j = start + 1; j <= end;j++)
 		{
@@ -21,22 +21,18 @@ public class QuickSortComparisons
 			{
 				swap(arr,j,i);
 				i = i +1;
-				//System.out.println(Arrays.toString(arr));
 			}
 		}
 		swap(arr,start,i-1);
-		//System.out.println(Arrays.toString(arr));
 		return i-1;
 	}
 	
 	public long countCompareLast(long[] arr, long start, long end)
 	{
-		//System.out.println(Arrays.toString(arr) + " " + start + " " + end);
 		long temp = arr[(int) end];
 		swap(arr,start,end);
 		long length = (end-start) + 1;
 		count += length - 1;
-		//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + temp);
 		long i = start + 1;
 		for(long j = start + 1; j <= end;j++)
 		{
@@ -47,13 +43,11 @@ public class QuickSortComparisons
 			}
 		}
 		swap(arr,start,i-1);
-		//System.out.println(Arrays.toString(arr) );
 		return i-1;
 	}
 	
 	public long countCompareMiddle(long[] arr, long start, long end)
 	{
-		
 		//choosing pivot
 		int intStart = (int) start;
 		int intEnd = (int) end;
@@ -71,9 +65,7 @@ public class QuickSortComparisons
 			pivot = intEnd;
 		
 		swap(arr,pivot, start);
-		//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + pivot + " " + temp);
 
-		//long temp = arr[(int) end];
 		long length = (end-start) + 1;
 		count += length - 1;
 		
@@ -93,7 +85,6 @@ public class QuickSortComparisons
 	
 	private void swap(long[] arr, long j, long i) 
 	{
-		// TODO Auto-generated method stub
 		long temp = arr[(int) i];
 		arr[(int) i] = arr[(int) j];
 		arr[(int) j] = temp;
@@ -105,7 +96,6 @@ public class QuickSortComparisons
 		if(start < end)
 		{
 			long m = countCompareFirst(arr,start,end);
-			//System.out.println(start + " " + end + " " + m);
 			sortFirst(arr,start,m-1);
 			sortFirst(arr,m+1,end);
 		}
@@ -116,7 +106,6 @@ public class QuickSortComparisons
 		if(start < end)
 		{
 			long m = countCompareLast(arr,start,end);
-			//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + m);
 			sortLast(arr,start,m-1);
 			sortLast(arr,m+1,end);
 		}
@@ -124,11 +113,9 @@ public class QuickSortComparisons
 	
 	void sortMiddle(long[] arr, long start, long end)
 	{
-		//System.out.println(Arrays.toString(arr) + " " + start + " " + end );
 		if(start < end)
 		{
 			long m = countCompareMiddle(arr,start,end);
-			//System.out.println(Arrays.toString(arr) + " " + start + " " + end + " " + m);
 			sortMiddle(arr,start,m-1);
 			sortMiddle(arr,m+1,end);
 		}
@@ -150,21 +137,20 @@ public class QuickSortComparisons
 	
 	public static void main(String[] args) throws FileNotFoundException 
 	{
-		// TODO Auto-generated method stub
 		QuickSortComparisons q = new QuickSortComparisons();
 		Scanner s = new Scanner(new File("quicksort.txt"));
 		long[] arr = q.array(s);
 		long[] copy = Arrays.copyOf(arr, arr.length);
 		q.sortFirst(copy, 0, arr.length-1);
-		System.out.println(q.count);//+ " " + Arrays.toString(copy));
+		System.out.println(q.count);
 		q.count = 0;
 		copy = Arrays.copyOf(arr, arr.length);
 		q.sortLast(copy, 0, arr.length-1);
-		System.out.println(q.count);// + " " + Arrays.toString(copy));
+		System.out.println(q.count);
 		q.count = 0;
 		copy = Arrays.copyOf(arr, arr.length);
 		q.sortMiddle(copy, 0, arr.length-1);
-		System.out.println(q.count );//+ " " + Arrays.toString(copy));
+		System.out.println(q.count);
 		q.count = 0;
 	}
 

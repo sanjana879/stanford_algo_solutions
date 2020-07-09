@@ -61,7 +61,6 @@ public class Inversions
 			int leftEnd = (right+left)/2;
 
 			x = sort_count(arr, left, leftEnd);
-			//System.out.println("here " + left + " " + right);
 			y = sort_count(arr, leftEnd+1, right);
 			z = merge_count(arr,left,right);
 		}
@@ -93,10 +92,6 @@ public class Inversions
 					add = (((right+left)/2)) - (leftP) + 1;
 				else
 					add = (((right+left)/2)) - (leftP) + 1;
-//				System.out.println((n/2) + " " + leftP);
-//				System.out.println(Arrays.toString(arr));
-//				System.out.println(Arrays.toString(temp));
-//				System.out.println("add "  + add + " " + arr[rightP]);
 				count += add;
 				rightP++;
 
@@ -114,8 +109,6 @@ public class Inversions
 		}
 		if(leftP <= (right+left)/2)
 		{
-//			int add = (n/2) - leftP + 1;
-//			count += add;
 			for(int j = leftP;j <= (right+left)/2 && i < temp.length;j++)
 			{
 				temp[i] = arr[j];

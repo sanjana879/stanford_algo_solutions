@@ -11,7 +11,6 @@ public class MedianMaintPQ
 	int size;
 	public static void main(String[] args) throws FileNotFoundException 
 	{
-		// TODO Auto-generated method stub
 		MedianMaintPQ m = new MedianMaintPQ();
 		Scanner s = new Scanner(new File("median.txt"));
 		m.takeNumbers(s);
@@ -25,7 +24,6 @@ public class MedianMaintPQ
 			int num = s.nextInt();
 			int median = findMedian(num);
 			sum += median;
-			//System.out.println(median);
 		}
 		System.out.println(sum % 10000);
 	}
