@@ -1,3 +1,4 @@
+package course2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+
 public class Dijskstra 
 {
 
@@ -20,9 +22,9 @@ public class Dijskstra
 		Dijskstra min = new Dijskstra();
 		Scanner s = new Scanner(new File("dijskstra.txt"));
 		WeightedGraph g = min.makeGraph(s);
-		System.out.println(g);
+		//System.out.println(g);
 		Hashtable<Vertex, Integer> table = (min.algorithm(g));
-		System.out.println(table);
+		//System.out.println(table);
 		System.out.println(table.get(min.findNode(7,g.g.keySet())));
 		System.out.println(table.get(min.findNode(37,g.g.keySet())));
 		System.out.println(table.get(min.findNode(59,g.g.keySet())));
@@ -176,5 +178,18 @@ class Edge
 	public String toString()
 	{
 		return String.valueOf("[" + dest + "," + weight + "]");
+	}
+}
+
+class Vertex
+{
+	int val;
+	public Vertex(int v)
+	{
+		val = v;
+	}
+	public String toString()
+	{
+		return String.valueOf(val);
 	}
 }
