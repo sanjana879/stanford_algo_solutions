@@ -152,7 +152,7 @@ public class QuickSortComparisons
 	{
 		// TODO Auto-generated method stub
 		QuickSortComparisons q = new QuickSortComparisons();
-		Scanner s = new Scanner(new File("input1.txt"));
+		Scanner s = new Scanner(new File("quicksort.txt"));
 		long[] arr = q.array(s);
 		long[] copy = Arrays.copyOf(arr, arr.length);
 		q.sortFirst(copy, 0, arr.length-1);
