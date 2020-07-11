@@ -184,6 +184,7 @@ class Edge
 class Vertex
 {
 	int val;
+	boolean inHeap = false;
 	public Vertex(int v)
 	{
 		val = v;
