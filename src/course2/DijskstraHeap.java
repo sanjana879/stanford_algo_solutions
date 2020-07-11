@@ -48,7 +48,11 @@ public class DijskstraHeap
 			 * loop through adjacent vertices, if not in heap, add. if in heap, update distance 
 			 */
 			QueueNode curr = min.poll();
-			curr.v.inHeap = false;
+			while(curr != null && curr.v.popped)
+				curr = min.poll();
+			if(curr == null)
+				break;
+			curr.v.popped = true;
 			if(table.get(curr.v) == null)
 			{
 				table.put(curr.v, curr.weight);
@@ -64,39 +68,15 @@ public class DijskstraHeap
 				Edge e = list.get(i);
 				Vertex currV = e.dest;
 				//use inHeap to determine if in Heap
-				if(!currV.inHeap)
+				if(table.get(currV) == null || table.get(currV) > curr.weight + e.weight)
 				{
-					if(table.get(currV) == null || table.get(currV) > curr.weight + e.weight)
-					{
-						min.add(new QueueNode(currV, curr.weight + e.weight));
-						currV.inHeap = true;
-					}
+					min.add(new QueueNode(currV, curr.weight + e.weight));
 				}
-				else
-				{
-					QueueNode node = findQueueNode(min, currV);
-					node.weight = Math.min(node.weight, curr.weight + e.weight);
-				}
-				
 			}
-			
-			
 		}
-		
 		return table;
 	}
 	
-	public QueueNode findQueueNode(PriorityQueue<QueueNode> q, Vertex v)
-	{
-		Iterator<QueueNode> iter = q.iterator();
-		while(iter.hasNext())
-		{
-			QueueNode n = iter.next();
-			if(n.v.val == v.val)
-				return n;
-		}
-		return null;
-	}
 	
 	public Vertex findNode(int key, Set<Vertex> keySet)
 	{

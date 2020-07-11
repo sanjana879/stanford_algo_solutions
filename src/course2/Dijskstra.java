@@ -22,7 +22,6 @@ public class Dijskstra
 		Dijskstra min = new Dijskstra();
 		Scanner s = new Scanner(new File("dijskstra.txt"));
 		WeightedGraph g = min.makeGraph(s);
-		//System.out.println(g);
 		Hashtable<Vertex, Integer> table = (min.algorithm(g));
 		//System.out.println(table);
 		System.out.println(table.get(min.findNode(7,g.g.keySet())));
@@ -184,7 +183,7 @@ class Edge
 class Vertex
 {
 	int val;
-	boolean inHeap = false;
+	boolean popped = false;
 	public Vertex(int v)
 	{
 		val = v;
