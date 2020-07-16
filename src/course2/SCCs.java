@@ -102,10 +102,10 @@ public class SCCs
 	public void DFSUtil(DirectedGraph g)
 	{
 		ArrayList<Integer> highest= new ArrayList<Integer>(5);
-		System.out.println(stack);
+		//System.out.println(stack);
 		while(!stack.isEmpty())
 		{
-			Node n = findNode(stack.pop().val,g.edges.keySet());
+			Node n = stack.pop();//findNode(stack.pop().val,g.edges.keySet());
 			if(!n.visited)
 			{
 				int cnt = DFS2(g,n,0);
