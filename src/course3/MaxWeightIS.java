@@ -19,10 +19,10 @@ public class MaxWeightIS
 	
 	public String algo(PathGraph p)
 	{
-		int[] arr = new int[p.size];
+		int[] arr = new int[p.size + 1];
 		arr[0] = 0;
 		arr[1] = p.list.get(0).val;
-		for(int i = 2; i < p.size;i++)
+		for(int i = 2; i <= p.size;i++)
 		{
 			//System.out.println(p.list.get(i-1).val);
 			arr[i] = Math.max(arr[i-1], arr[i-2] + p.list.get(i-1).val);
