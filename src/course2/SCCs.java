@@ -37,45 +37,50 @@ public class SCCs
 	{
 		HashMap<Node, List<Node>> edges = new HashMap<Node, List<Node>>();
 		HashSet<Integer> v = new HashSet<Integer>();
+		HashMap<Integer, Node> nodes = new HashMap<Integer, Node>();
 		while(s.hasNextLine())
 		{
 			String[] input = s.nextLine().split(" " );
-			Node key = new Node(Integer.parseInt(input[0]));
-			List<Node> values = edges.get(findNode(key.val,edges.keySet()));
+			Node key = nodes.get(Integer.parseInt(input[0]));
+			if(key == null)
+			{
+				key = new Node(Integer.parseInt(input[0]));
+				nodes.put(Integer.parseInt(input[0]), key);
+			}
+			List<Node> values = edges.get(key);
 			if(values == null)
 			{
 				values = new ArrayList<Node>();
-				Node added = findNode(Integer.parseInt(input[1]),edges.keySet());
+				Node added = nodes.get(Integer.parseInt(input[1]));
 				if(added == null)
 				{
 					added = new Node(Integer.parseInt(input[1]));
 					edges.put(added, new ArrayList<Node>());
+					nodes.put(Integer.parseInt(input[1]), added);
 				}
 				values.add(added);
 				edges.put(key, values);
 			}
 			else
 			{
-				Node added = findNode(Integer.parseInt(input[1]),edges.keySet());
+				Node added = nodes.get(Integer.parseInt(input[1]));
 				if(added == null)
 				{
 					added = new Node(Integer.parseInt(input[1]));
 					edges.put(added, new ArrayList<Node>());
+					nodes.put(Integer.parseInt(input[1]), added);
 				}
 				values.add(added);
 			}
 		}
-		
-		DirectedGraph d = new DirectedGraph(edges,v);
+		DirectedGraph d = new DirectedGraph(edges,v,nodes);
 		return d;
 	}
 	int t;
 	Node s;
 	public void algorithm(DirectedGraph g)
 	{
-		System.out.println(g.edges);
 		DirectedGraph rev = g.reverse();
-		System.out.println(rev);
 		DFSLoop(rev);
 		Iterator<Node> nodes = rev.edges.keySet().iterator();
 		while(nodes.hasNext())
@@ -101,11 +106,9 @@ public class SCCs
 	}
 	public void DFSUtil(DirectedGraph g)
 	{
-		ArrayList<Integer> highest= new ArrayList<Integer>(5);
-		//System.out.println(stack);
 		while(!stack.isEmpty())
 		{
-			Node n = stack.pop();//findNode(stack.pop().val,g.edges.keySet());
+			Node n = stack.pop();
 			if(!n.visited)
 			{
 				int cnt = DFS2(g,n,0);
@@ -156,6 +159,7 @@ class DirectedGraph
 {
 	HashMap<Node, List<Node>> edges = new HashMap<Node, List<Node>>();
 	HashSet<Integer> vertices = new HashSet<Integer>();
+	HashMap<Integer, Node> nodes = new HashMap<Integer, Node>();
 	public DirectedGraph()
 	{
 		edges = new HashMap<Node, List<Node>>();
@@ -164,10 +168,11 @@ class DirectedGraph
 	{
 		edges = e;
 	}
-	public DirectedGraph(HashMap<Node,List<Node>> e,HashSet<Integer> v)
+	public DirectedGraph(HashMap<Node,List<Node>> e,HashSet<Integer> v, HashMap<Integer, Node> n)
 	{
 		edges = e;
 		vertices = v;
+		nodes = n;
 	}
 	
 	public DirectedGraph reverse()
