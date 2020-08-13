@@ -8,4 +8,4 @@ Course 1 - Karatsuba Multiplication, Inversions, Quicksort Comparisons Count, Gr
 Course 2 - Largest Strongly Connected Components, Dijskstra's Algorithim (Non-Heap & Heap), Median Maintenance (Heap)
 
 
-Course 3 - Prim's Min Spanning Tree(Heap), Job Scheduling, Clustering(Union-Find - LinkedList), Huffman Codes, Maximum Weighted Independent Set
+Course 3 - Prim's Min Spanning Tree(Heap), Job Scheduling, Clustering(Union-Find - LinkedList), Huffman Codes, Maximum Weighted Independent Set, Knapsack (Optimized)

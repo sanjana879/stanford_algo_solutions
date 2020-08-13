@@ -14,7 +14,7 @@ public class Knapsack
 		Knapsack obj = new Knapsack();
 		Scanner s = new Scanner(new File("knapsack.txt"));
 		Knap k = obj.make(s);
-		System.out.println(obj.algo(k));
+		System.out.println(obj.algoOptimized(k));
 	}
 	
 	public Knap make(Scanner s)
@@ -36,6 +36,32 @@ public class Knapsack
 		return new Knap(values, weights, capacity, items);
 	}
 	
+	public int algoOptimized(Knap k) 
+	{
+		int[][] A = new int[2][k.capacity + 1];
+		int row = 1;
+		for(int i = 1;i <= k.items;i++)
+		{
+			int weight = k.weights.get(i);
+			row = (row == 1) ? 0 : 1;
+			for(int x = 0; x <= k.capacity;x++)
+			{
+				if(weight <= x)
+				{
+					if(row == 1)
+						A[row][x] = Math.max(A[row-1][x], A[row-1][x-weight] + k.values.get(i));
+					else
+						A[row][x] = Math.max(A[row+1][x], A[row+1][x-weight] + k.values.get(i));
+				}
+				else
+				{
+					A[row][x] = (row == 1) ? A[row-1][x] : A[row+1][x];
+				}
+			}	
+		}
+		return A[row][A[0].length - 1];
+	}
+	
 	public int algo(Knap k) 
 	{
 		int[][] A = new int[k.items + 1][k.capacity + 1];
@@ -45,10 +71,13 @@ public class Knapsack
 			for(int x = 0; x <= k.capacity;x++)
 			{
 				if(weight <= x)
+				{
 					A[i][x] = Math.max(A[i-1][x], A[i-1][x-weight] + k.values.get(i));
+				}
 				else
 					A[i][x] = A[i-1][x];
 			}
+			System.out.println(Arrays.toString(A[i]));
 		}
 		return A[A.length - 1][A[0].length - 1];
 	}
