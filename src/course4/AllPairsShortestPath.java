@@ -18,15 +18,32 @@ public class AllPairsShortestPath {
 		AllPairsShortestPath a = new AllPairsShortestPath();
 		Scanner s = new Scanner(new File("allpairs.txt"));
 		WeightedGraph g = a.makeGraph(s);
-		System.out.println(g);
 		int shortest = a.algo(g);
 		System.out.println((shortest == Integer.MIN_VALUE ? null : shortest));
 
 	}
 	
+	public int johnsonsAlgo(WeightedGraph g)
+	{
+		int min = Integer.MAX_VALUE;
+		
+		
+		
+		return min;
+	}
+	
+	public void step1(WeightedGraph g)
+	{
+		Vertex v = new Vertex(0);
+		HashMap<Vertex, Integer> map = new HashMap<Vertex, Integer>();
+		g.g.keySet().forEach((k) -> {
+			map.put(k, 0);
+		});
+	}
+	
 	public int algo(WeightedGraph g)
 	{
-		int[][][] A = new int[g.numVertices+1][g.numVertices+1][g.numVertices+1];
+		int[][] A = new int[g.numVertices+1][g.numVertices+1];
 		HashMap<Vertex, HashMap<Vertex, Integer>> map = g.g;
 		HashMap<Integer, Vertex> nodes = g.verticies;
 		int min = Integer.MAX_VALUE;
@@ -38,17 +55,17 @@ public class AllPairsShortestPath {
 				Vertex jVer = nodes.get(j);
 				
 				if(i == j)
-					A[i][j][0] = 0;
+					A[i][j] = 0;
 				else if(map.containsKey(iVer) && map.get(iVer).containsKey(jVer))
 				{
-					A[i][j][0] = map.get(iVer).get(jVer);
+					A[i][j] = map.get(iVer).get(jVer);
 				}
 				else
 				{
-					A[i][j][0] = Integer.MAX_VALUE;
+					A[i][j] = Integer.MAX_VALUE;
 				}
-				if(A[i][j][0] < min)
-					min = A[i][j][0];
+				if(A[i][j] < min)
+					min = A[i][j];
 				
 			}
 		}
@@ -59,13 +76,13 @@ public class AllPairsShortestPath {
 			{
 				for(int j = 1; j <= g.numVertices;j++)
 				{
-					if(A[i][k][k-1] != Integer.MAX_VALUE && A[k][j][k-1] != Integer.MAX_VALUE)
-						A[i][j][k] = Math.min(A[i][j][k-1], A[i][k][k-1] + A[k][j][k-1]);
+					if(A[i][k] != Integer.MAX_VALUE && A[k][j] != Integer.MAX_VALUE)
+						A[i][j] = Math.min(A[i][j], A[i][k] + A[k][j]);
 					else
-						A[i][j][k] = A[i][j][k-1];
-					if(A[i][j][k] < min)
-						min = A[i][j][k];
-					if(A[i][i][k] < 0)
+						A[i][j] = A[i][j];
+					if(A[i][j] < min)
+						min = A[i][j];
+					if(A[i][i] < 0)
 						min = Integer.MIN_VALUE;
 				}
 				
